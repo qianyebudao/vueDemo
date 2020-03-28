@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <p>Hello {{name}} {{age}}</p>
+        <p v-text="name"></p>
+        <p v-html="url"></p>
+        
+        <img v-bind:src="imgUrl">
+        <br>
+        <img :src="imgUrl">
+
+        <br>
+
+        <button v-on:click="click1">点击1</button>
+
+        <button @click="click2(name)">点击2</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'Vue',
+                age:10,
+                url:'<a href="http://www.baidu.com">百度</a>',
+                imgUrl:'https://cn.vuejs.org/images/logo.png'
+            },
+            methods:{
+                click1(){
+                    alert("aaaaaaaa");
+                },
+                click2(msg){
+                    alert(msg);
+                }
+            }
+        })
+        vm.name = 'Tom'
+    </script>
+
+</body>
+</html>

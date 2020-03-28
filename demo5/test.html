@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>froEach</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <input type="text" v-model="search">
+        <table>
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(p,index) in filterPerson" :key="index">
+                <td>{{index+1}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.age}}</td>
+                <td>
+                    <button @click="del(id)">删除</button>
+                    <button @click="update(index,{name:'Cat',age:20})" >更新</button>
+                </td>
+            </tr>
+        </table>
+        <button @click="setOrderType(1)">升序</button>
+        <button @click="setOrderType(2)">降序</button>
+        <button @click="setOrderType(0)">原序</button>
+    </div>
+
+<script>
+    const vm = new Vue({
+        el:'#demo',
+        data:{
+            search : '',
+            orderType : 0,
+            person:[
+                {name:'Tom',age:18},
+                {name:'Lily',age:20},
+                {name:'Rose',age:22},
+                {name:'Jor',age:26},
+                {name:'Bob',age:17}
+            ]
+        },
+        methods:{
+            del(index){
+                this.person.splice(index,1)
+            },
+            update(id,newP){
+                this.person.splice(id,1,newP)
+            },
+            setOrderType(type){
+                this.orderType = type
+            }
+        },
+        computed:{
+            filterPerson(){
+                const {search,person,orderType}= this
+
+                //
+                let fPerson;
+                fPerson = person.filter(p => p.name.indexOf(search) !== -1)
+
+                //
+                if(orderType!==0){
+                    fPerson.sort(function (p1,p2){
+                        if(orderType==1){
+                            return p2.age - p1.age
+                        }else{
+                            return p1.age - p2.age
+                        }
+                    })
+                }
+                return fPerson
+            }
+        }
+    })
+</script>
+</body>
+</html>

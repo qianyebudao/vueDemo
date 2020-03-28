@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件判断</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+<body>
+    <div id="demo">
+        <p v-if="ok">成功</p>
+        <p v-else>失败</p>
+
+        <p v-show="ok">我爱你</p>
+        <p v-show="!ok">我不爱你</p>
+
+        <button @click="ok=!ok">点击</button>
+    </div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#demo',
+        data:{
+            ok: true
+        }
+    })
+</script>
+
+</body>
+</html>
